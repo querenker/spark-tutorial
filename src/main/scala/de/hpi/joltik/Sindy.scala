@@ -1,6 +1,6 @@
-package de.hpi.spark_tutorial
+package de.hpi.joltik
 
-import org.apache.spark.sql.{Dataset, Row, SparkSession}
+import org.apache.spark.sql.{Row, SparkSession}
 
 object Sindy {
 
@@ -8,12 +8,12 @@ object Sindy {
 
     import spark.implicits._
 
-    val datasets = inputs.map(file =>
+    val datasets = inputs.map(
       spark.read
         .option("inferSchema", "false")
         .option("header", "true")
         .option("sep", ";")
-        .csv(file)
+        .csv(_)
     )
 
     val cells = datasets.map(dataSet => {
